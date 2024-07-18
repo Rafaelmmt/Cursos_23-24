@@ -11,7 +11,7 @@ const useBurgerNav = ref(false)
     <nav class="navbar is-success" role="navigation" aria-label="main navigation">
         <div class="container is-max-desktop">
             <div class="navbar-brand">
-                <div class="navbar-item is-size-4 is-family-monospace">Note App</div>
+                <div class="navbar-item is-size-4 courier-prime-regular">Note App</div>
     
                 <a
                     class="navbar-burger"
@@ -40,6 +40,12 @@ const useBurgerNav = ref(false)
 </template>
 
 <style scoped>
+.courier-prime-regular {
+  font-family: "Courier Prime", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
 .navbar-burger, .navbar-item {
     color: rgb(255, 255, 255);
 }
