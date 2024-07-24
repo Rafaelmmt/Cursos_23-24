@@ -25,7 +25,7 @@
       </div>
     </div>
 
-    <NoteCard v-for="note in notes" :key="note.id" :note="note" />
+    <NoteCard v-for="note in notes" :key="note.id" :note="note" @deleteClick="deleteNote" />
 
   </div>
 </template>
@@ -59,5 +59,12 @@ const addNote = () => {
   notes.value.unshift(note)
   newNote.value = ''
   newNoteRef.value.focus()
+}
+
+// Função DELETAR NOTE 
+const deleteNote = (selectedId) => {
+  notes.value = notes.value.filter(note => { 
+    return note.id !== selectedId
+  })
 }
 </script>
