@@ -25,15 +25,20 @@
       </div>
     </div>
 
-    <NoteCard v-for="note in notes" :key="note.id" :note="note" @deleteClick="deleteNote" />
+    <NoteCard v-for="note in storeNotes.notes" :key="note.id" :note="note" @deleteClick="deleteNote" />
 
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import NoteCard from '@/components/Notes/NoteCard.vue';
+import { useStoreNotes } from '@/stores/storeNotes.js'
+import NoteCard from '@/components/Notes/NoteCard.vue'
 
+// Use PINIA STORE
+const storeNotes = useStoreNotes()
+
+// FUNÇÃO ADD NEW NOTE
 const newNote = ref('')
 const newNoteRef = ref(null)
 
@@ -50,13 +55,14 @@ const notes = ref([
 ])
 
 const addNote = () => {
-  let currentDate = new Date().getTime()
+  storeNotes.addNote()
+  /*let currentDate = new Date().getTime()
   let id = currentDate.toString()
   let note = {
     id: id,
     content: newNote.value
   }
-  notes.value.unshift(note)
+  notes.value.unshift(note)*/
   newNote.value = ''
   newNoteRef.value.focus()
 }
