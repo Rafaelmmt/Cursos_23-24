@@ -9,9 +9,14 @@
       </div>
     </div>
     <footer class="card-footer">
-      <a href="#" class="card-footer-item">Edit</a>
+      <RouterLink 
+        :to="`/editNote/${ note.id }`"
+        class="card-footer-item"
+      >
+        Edit
+      </RouterLink>
       <a 
-        @click.prevent="deleteClick"
+        @click.prevent="storeNotes.deleteNote(note.id)"
         href="#" 
         class="card-footer-item"
       > 
@@ -23,21 +28,18 @@
 
 <script setup>
 import { computed } from 'vue';
+import { useStoreNotes } from '@/stores/storeNotes.js'
 
-// PROPS & EMITS
+// Use PINIA STORE
+const storeNotes = useStoreNotes()
+
+// PROPS
 const props = defineProps({
   note: {
     type: Object,
     required: true
   }
 })
-
-const emit = defineEmits(['deleteClick'])
-
-// Função DELETE CLICKED 
-const deleteClick = () => {
-  emit('deleteClick', props.note.id)
-}
 
 // Função NOTE CHARACTERS  
 const noteLength = computed(() => {

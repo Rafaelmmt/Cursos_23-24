@@ -1,5 +1,20 @@
 <template>
   <div class="note">
+
+    <AddEditNote v-model="newNote">
+      
+      <template v-slot:buttons>
+        <button
+          class="button is-link has-background-success-ligth"
+          @click="addNote"
+          :disabled="!newNote"
+        >
+          Add New Note
+        </button>
+      </template>
+    </AddEditNote>
+    
+    <!--
     <div class="has-background-success-dark p-4 mb-5">
       <div class="field">
         <div class="control">
@@ -24,8 +39,9 @@
         </div>
       </div>
     </div>
+    -->
 
-    <NoteCard v-for="note in storeNotes.notes" :key="note.id" :note="note" @deleteClick="deleteNote" />
+    <NoteCard v-for="note in storeNotes.notes" :key="note.id" :note="note" />
 
   </div>
 </template>
@@ -34,43 +50,18 @@
 import { ref } from 'vue'
 import { useStoreNotes } from '@/stores/storeNotes.js'
 import NoteCard from '@/components/Notes/NoteCard.vue'
+import AddEditNote from '@/components/Notes/AddEditNote.vue';
 
 // Use PINIA STORE
 const storeNotes = useStoreNotes()
 
 // FUNÇÃO ADD NEW NOTE
-const newNote = ref('')
+const newNote = ref('23')
 const newNoteRef = ref(null)
 
-const notes = ref([
-  {
-    id: 'id1',
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam lorem nibh, maximus commodo sollicitudin eu, volutpat et mi. Vestibulum rhoncus velit id turpis eleifend, dictum placerat purus lobortis.'
-  },
-  {
-    id: 'id2',
-    content: 'Lorem ipsum da turpis eleifend, dictum placerat purus lobortis.'
-  }
-])
-
 const addNote = () => {
-  storeNotes.addNote()
-  /*let currentDate = new Date().getTime()
-  let id = currentDate.toString()
-  let note = {
-    id: id,
-    content: newNote.value
-  }
-  notes.value.unshift(note)*/
+  storeNotes.addNote(newNote.value)
   newNote.value = ''
   newNoteRef.value.focus()
-}
-
-// Função DELETAR NOTE 
-const deleteNote = (selectedId) => {
-  notes.value = notes.value.filter(note => { 
-    return note.id !== selectedId
-  })
 }
 </script>

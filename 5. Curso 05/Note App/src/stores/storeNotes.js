@@ -9,8 +9,21 @@ export const useStoreNotes = defineStore('storeNotes', {
     }
   },
   actions: {
-    addNote () {
-      console.log('addNote')
-    }
+    // FUNÇÃO ADD NEW NOTE
+    addNote (newNoteContent) {
+      let currentDate = new Date().getTime()
+      let id = currentDate.toString()
+      let note = {
+        id: id,
+        content: newNoteContent
+      }
+      this.notes.unshift(note)
+    },
+    // FUNÇÃO DELETAR NOTE
+    deleteNote (idToDelete) {
+      this.notes = this.notes.filter( note => {
+        return note.id !== idToDelete})
+    },
+    
   }
 })

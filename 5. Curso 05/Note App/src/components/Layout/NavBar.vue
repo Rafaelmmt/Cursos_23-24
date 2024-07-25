@@ -1,17 +1,22 @@
 <script setup>
 import { ref } from 'vue';
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
 
 // NavBar-Burger
 const useBurgerNav = ref(false)
 
+// Usar Vue Router como parâmetro
+const router = useRouter();
+const homepage = () => {
+    router.push({ name: 'notes' })
+}
 </script>
 
 <template>
     <nav class="navbar is-success" role="navigation" aria-label="main navigation">
         <div class="container is-max-desktop">
             <div class="navbar-brand">
-                <div class="navbar-item is-size-4 courier-prime-regular">Note App</div>
+                <div @click="homepage" class="navbar-item is-size-4 app-title">Note App</div>
     
                 <a
                     class="navbar-burger"
@@ -40,10 +45,11 @@ const useBurgerNav = ref(false)
 </template>
 
 <style scoped>
-.courier-prime-regular {
+.app-title {
   font-family: "Courier Prime", monospace;
   font-weight: 400;
   font-style: normal;
+  cursor: pointer;
 }
 
 .navbar-burger, .navbar-item {
