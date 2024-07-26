@@ -36,8 +36,8 @@ const homepage = () => {
     
             <div id="navbarBasicExample" class="navbar-menu" :class="{ 'is-active' : useBurgerNav }">
                 <div class="navbar-end">
-                    <RouterLink class="navbar-item" to="/" active-class="active">Notes</RouterLink>
-                    <RouterLink class="navbar-item" to="/stats" active-class="active">Stats</RouterLink>
+                    <RouterLink @click="useBurgerNav=false" class="navbar-item" to="/" active-class="active">Notes</RouterLink>
+                    <RouterLink @click="useBurgerNav=false" class="navbar-item" to="/stats" active-class="active">Stats</RouterLink>
                 </div>
             </div>
         </div>

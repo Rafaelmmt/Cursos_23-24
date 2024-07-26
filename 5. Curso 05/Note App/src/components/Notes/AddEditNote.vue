@@ -1,13 +1,16 @@
 <template>
-  <div class="has-background-success-dark p-4 mb-5">
+  <div class="p-4 mb-5" :class="`has-background-${ props.cardBgColor }-dark`">
+    <div class="mb-4">
+      <label v-if="props.labelOn" class="has-text-white"> {{ labelOn }} </label>
+    </div>
     <div class="field">
       <div class="control">
         <textarea
-          :value="modelValue"
+          :value="props.modelValue"
           @input="$emit('update:modelValue', $event.target.value)"
-          ref="newNoteRef" 
+          ref="refocusBox" 
           class="textarea" 
-          placeholder="Escreva aqui sua nota..."
+          :placeholder="props.placeholderText"
         />
       </div>
     </div>
@@ -21,13 +24,36 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
+
 // PROPS E EMITS
 const props = defineProps({
   modelValue: {
     type: String,
     required: true
+  },
+  cardBgColor: {
+    type: String,
+    default: 'success'
+  },
+  placeholderText: {
+    type: String,
+    default: 'Escreva uma nova nota...'
+  },
+  labelOn:{
+    type: String
   }
 })
-
+// eslint-disable-next-line no-unused-vars
 const emit = defineEmits(['update:modelValue'])
+
+// FUNÇÃO FOCUS TEXTAREA
+const refocusBox = ref(null)
+const focusTextarea = () => {
+  refocusBox.value.focus()
+}
+
+defineExpose({
+  focusTextarea
+})
 </script>

@@ -4,8 +4,25 @@ export const useStoreNotes = defineStore('storeNotes', {
   state: () => {
     return { 
       notes: [
-        { id:'000', content:'Note01'}
+        { id:'000', content:'Note 001'}
       ] 
+    }
+  },
+  getters: {
+    getNoteContent: (state) => {
+      return (id) => {
+        return state.notes.filter(note => note.id === id)[0].content
+      }
+    },
+    totalNotesCount: (state) => {
+      return state.notes.length
+    },
+    totalCharactersCount: (state) => {
+      let chCount = 0
+      state.notes.forEach(note => {
+        chCount += note.content.length
+      })
+      return chCount
     }
   },
   actions: {
@@ -21,9 +38,11 @@ export const useStoreNotes = defineStore('storeNotes', {
     },
     // FUNÇÃO DELETAR NOTE
     deleteNote (idToDelete) {
-      this.notes = this.notes.filter( note => {
-        return note.id !== idToDelete})
+      this.notes = this.notes.filter(note => note.id !== idToDelete)
     },
-    
+    updateNote (id, content) {
+      let index = this.notes.findIndex(note => note.id === id)
+      this.notes[index].content = content
+    }
   }
 })

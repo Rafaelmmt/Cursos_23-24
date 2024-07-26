@@ -1,8 +1,7 @@
 <template>
   <div class="note">
 
-    <AddEditNote v-model="newNote">
-      
+    <AddEditNote v-model="newNote" ref="boxFocus">
       <template v-slot:buttons>
         <button
           class="button is-link has-background-success-ligth"
@@ -13,33 +12,6 @@
         </button>
       </template>
     </AddEditNote>
-    
-    <!--
-    <div class="has-background-success-dark p-4 mb-5">
-      <div class="field">
-        <div class="control">
-          <textarea 
-            class="textarea" 
-            v-model="newNote" 
-            placeholder="Escreva aqui sua nota..."
-            ref="newNoteRef" 
-          />
-        </div>
-      </div>
-
-      <div class="field is-grouped is-grouped-right">
-        <div class="control">
-          <button
-            class="button is-link has-background-success-ligth"
-            @click="addNote"
-            :disabled="!newNote"
-          >
-            Add New Note
-          </button>
-        </div>
-      </div>
-    </div>
-    -->
 
     <NoteCard v-for="note in storeNotes.notes" :key="note.id" :note="note" />
 
@@ -56,12 +28,12 @@ import AddEditNote from '@/components/Notes/AddEditNote.vue';
 const storeNotes = useStoreNotes()
 
 // FUNÇÃO ADD NEW NOTE
-const newNote = ref('23')
-const newNoteRef = ref(null)
+const newNote = ref('')
+const boxFocus = ref(null)
 
 const addNote = () => {
   storeNotes.addNote(newNote.value)
   newNote.value = ''
-  newNoteRef.value.focus()
+  boxFocus.value.focusTextarea()
 }
 </script>
