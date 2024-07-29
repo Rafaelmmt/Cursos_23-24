@@ -3,18 +3,18 @@
     <table class="table is-fullwidth">
       <thead>
         <tr>
-          <th>Stat</th>
-          <th>Value</th>
+          <th>Dados</th>
+          <th class="is-flex is-justify-content-center">Valores</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Number of Notes</td>
-          <td>{{ storeNotes.totalNotesCount }}</td>
+          <td>Total de Notas</td>
+          <td class="is-flex is-justify-content-center">{{ storeNotes.totalNotesCount }}</td>
         </tr>
         <tr>
-          <td>Number of Character (of all notes)</td>
-          <td>{{ storeNotes.totalCharactersCount }}</td>
+          <td>Total de Characteres (de todas as notas)</td>
+          <td class="is-flex is-justify-content-center">{{ storeNotes.totalCharactersCount }}</td>
         </tr>
       </tbody>
     </table>
@@ -25,3 +25,9 @@
 import { useStoreNotes } from '@/stores/storeNotes';
 const storeNotes = useStoreNotes()
 </script>
+
+<style scoped>
+.alinhar-centro{
+  align-content: center;
+}
+</style>

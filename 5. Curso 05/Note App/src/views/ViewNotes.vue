@@ -8,7 +8,7 @@
           @click="addNote"
           :disabled="!newNote"
         >
-          Add New Note
+          Criar nova nota!
         </button>
       </template>
     </AddEditNote>
@@ -23,6 +23,7 @@ import { ref } from 'vue'
 import { useStoreNotes } from '@/stores/storeNotes.js'
 import NoteCard from '@/components/Notes/NoteCard.vue'
 import AddEditNote from '@/components/Notes/AddEditNote.vue';
+import { useWatchCharacters } from '@/use/useWatchCharacters';
 
 // Use PINIA STORE
 const storeNotes = useStoreNotes()
@@ -36,4 +37,7 @@ const addNote = () => {
   newNote.value = ''
   boxFocus.value.focusTextarea()
 }
+
+// Watch Characters
+useWatchCharacters(newNote, 100)
 </script>

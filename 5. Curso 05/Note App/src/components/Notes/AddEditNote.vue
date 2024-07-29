@@ -10,7 +10,9 @@
           @input="$emit('update:modelValue', $event.target.value)"
           ref="refocusBox" 
           class="textarea" 
+          maxlength="100"
           :placeholder="props.placeholderText"
+          v-autofocus
         />
       </div>
     </div>
@@ -25,6 +27,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import { vAutofocus } from '@/directives/vAutofocus';
 
 // PROPS E EMITS
 const props = defineProps({

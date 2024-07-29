@@ -13,25 +13,28 @@
         :to="`/editNote/${ note.id }`"
         class="card-footer-item"
       >
-        Edit
+        Editar
       </RouterLink>
       <a 
-        @click.prevent="storeNotes.deleteNote(note.id)"
+        @click.prevent="modals.deleteNote = true"
         href="#" 
         class="card-footer-item"
       > 
-        Delete
+        Deletar
       </a>
     </footer>
+    <ModalDeleteNote v-if="modals.deleteNote" v-model="modals.deleteNote" :noteId="note.id" />
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import { useStoreNotes } from '@/stores/storeNotes.js'
+import { reactive, computed } from 'vue';
+//import { useStoreNotes } from '@/stores/storeNotes.js'
+
+import ModalDeleteNote from './ModalDeleteNote.vue';
 
 // Use PINIA STORE
-const storeNotes = useStoreNotes()
+//const storeNotes = useStoreNotes()
 
 // PROPS
 const props = defineProps({
@@ -47,5 +50,10 @@ const noteLength = computed(() => {
   let descripition = lengthSum > 1 ? 'characters' : 'character'
   return `${lengthSum} ${descripition}`
 }) 
+
+// MODALS
+const modals = reactive ({
+  deleteNote: false
+})
 
 </script>

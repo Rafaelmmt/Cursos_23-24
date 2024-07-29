@@ -4,22 +4,22 @@
       v-model="noteContent" 
       ref="boxFocus" 
       cardBgColor="link" 
-      labelOn="Edit Note"
-      placeholderText="Edit note..."
+      labelOn="Editar Nota"
+      placeholderText="Editar nota..."
     >
       <template v-slot:buttons>
         <button
           @click="$router.push('/')"
           class="mr-2 button has-background-ligth"
         >
-          Cancel
+          Cancelar
         </button>
         <button
           @click="editNote"
           class="button is-link has-background-link-ligth"
           :disabled="!noteContent"
         >
-          Edit Note
+          Editar Nota
         </button>
       </template>
     </AddEditNote>
@@ -31,6 +31,7 @@ import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useStoreNotes } from '@/stores/storeNotes';
 import AddEditNote from '@/components/Notes/AddEditNote.vue';
+import { useWatchCharacters } from '@/use/useWatchCharacters';
 
 const route = useRoute()
 const router = useRouter()
@@ -43,4 +44,8 @@ const editNote = () => {
   storeNotes.updateNote(route.params.id, noteContent.value)
   router.push('/')
 }
+
+// Watch Characters
+useWatchCharacters(noteContent, 100)
+
 </script>
